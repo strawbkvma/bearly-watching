@@ -441,7 +441,7 @@ Never publish:
 
 Bearly Watching is open-source software licensed under the **MIT License**.
 
-See [`LICENSE`](LICENSE) for details.
+See [`LICENSE`](LISENCE) for details.
 
 ---
 
