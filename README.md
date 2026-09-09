@@ -1,19 +1,20 @@
 # Bearly Watching 🧸🍓
 
-> A tiny macOS app that turns your Safari YouTube session into Discord Rich Presence.
+> A simple macOS app that turns your Safari YouTube session into Discord Rich Presence.
 
-Bearly Watching is a lightweight, local-only macOS app that detects YouTube videos playing in Safari and displays your current watch session on Discord Rich Presence.
+**Bearly Watching** is a lightweight, local-only macOS app that detects YouTube videos playing in Safari and turns your current watch session into a cute simple Youtube Discord Rich Presence.
 
-It can detect videos across Safari tabs — even when the YouTube tab is not currently active.
+It works across Safari tabs — even when the YouTube tab isn't currently active.
 
-Everything runs locally on your Mac. No YouTube login, external server, or account data is required.
+Everything runs locally on your Mac.
+No YouTube login. No external backend. No tracking.
 
 ---
 
 ## ✨ Features
 
 * 🎬 Detect YouTube videos across Safari tabs
-* 📺 Detect YouTube channel name
+* 📺 Detect YouTube channel names
 * ▶️ Playing detection
 * 💤 Pause detection
 * 🍓 Finished video detection
@@ -22,20 +23,25 @@ Everything runs locally on your Mac. No YouTube login, external server, or accou
 * ⏱️ Playback progress
 * 🔗 Watch Video button
 * 🔌 Discord auto-reconnect
-* 🛡️ Safari and Discord error handling
-* 🚀 LaunchAgent background support
-* 🔒 No YouTube login or external server required
+* 🛡️ Safari & Discord error handling
+* 🚀 Automatic background mode with LaunchAgent
+* 🔒 Local-only architecture
 
 ---
 
 ## 🛠️ Requirements
 
+Before installing, make sure you have:
+
 * macOS
 * Safari
 * Discord Desktop
 * Python 3
-* Internet connection for Discord and YouTube thumbnails
-* Safari's **Allow JavaScript from Apple Events** setting enabled
+* An active internet connection for Discord and YouTube thumbnails
+
+You will also need to enable Safari's:
+
+**Develop → Allow JavaScript from Apple Events**
 
 ---
 
@@ -48,62 +54,64 @@ git clone https://github.com/strawbkvma/bearly-watching.git
 cd bearly-watching
 ```
 
-### 2. Create a virtual environment
+### 2. Run the installer
 
 ```bash
-python3 -m venv .venv
+./install.sh
 ```
 
-Activate it:
+The installer automatically:
 
-```bash
-source .venv/bin/activate
-```
+* 🐍 Creates a Python virtual environment
+* 📦 Installs the required dependencies
+* 📁 Creates the local `logs/` directory
+* 🚀 Configures the macOS LaunchAgent
+* 🧸 Starts Bearly Watching in the background
 
-### 3. Install dependencies
+You don't need to create your own Discord Application.
 
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Run Bearly Watching
-
-```bash
-python main.py
-```
-
-> Bearly Watching uses a public Discord Application ID, so you do **not** need to create your own Discord Application.
+Bearly Watching uses a public Discord Application ID included in the project configuration.
 
 ---
 
-## 🌐 Safari Setup
+### 3. Enable Safari automation
 
-Bearly Watching uses Safari's AppleScript automation and JavaScript to inspect YouTube tabs and read the HTML5 video player state.
+Before Bearly Watching can detect YouTube videos, enable:
 
-Safari needs to allow JavaScript execution through Apple Events.
-
-### Enable JavaScript from Apple Events
-
-In Safari, enable:
-
-**Develop → Allow JavaScript from Apple Events**
+**Safari → Develop → Allow JavaScript from Apple Events**
 
 Depending on your macOS and Safari version, you may need to enable Safari's developer features first.
+
+macOS may also ask for permission to allow automation between applications.
+
+> **Tip:** If macOS shows an automation permission prompt, allow it so Bearly Watching can communicate with Safari.
+
+---
+
+### 4. Open YouTube in Safari
+
+Open a YouTube video in Safari and start playing it.
+
+Bearly Watching will automatically detect the video and update your Discord Rich Presence.
+
+You can even switch to another Safari tab while the YouTube video continues playing.
+
+That's it. 🧸🍓
 
 ---
 
 ## 💬 Discord Rich Presence
 
-When you are watching YouTube, Discord displays an activity similar to:
+When you're watching YouTube, Discord displays an activity similar to:
 
 > **Watching YouTube 🍓 · Channel**
 
-The activity can include:
+Depending on the current playback state, your activity can include:
 
 * 🖼️ YouTube thumbnail
 * 🎬 Video title
 * 📺 Channel name
-* ▶️ Current playback state
+* ▶️ Playback state
 * ⏱️ Playback progress
 * 🔗 Watch Video button
 
@@ -123,18 +131,18 @@ The activity can include:
 
 Bearly Watching can distinguish between regular YouTube videos and live streams.
 
-Live streams can be detected as:
+Supported live states include:
 
 * 🔴 Live and playing
 * ▶️ Live stream paused
 
-Because live streams do not have a normal fixed duration, playback progress is handled differently from regular videos.
+Because live streams don't have a normal fixed duration, playback progress is handled differently from regular videos.
 
 ---
 
 ## 🐻 Multi-Tab Detection
 
-Bearly Watching does **not** require the YouTube tab to be your active Safari tab.
+Bearly Watching doesn't require YouTube to be your active Safari tab.
 
 For example:
 
@@ -147,23 +155,38 @@ Safari
 └── Documentation
 ```
 
-Even if you are currently viewing another Safari tab, Bearly Watching can still detect the YouTube video playing in the background.
+Even if you're working in another Safari tab, Bearly Watching can still detect the YouTube video playing in the background.
+
+Perfect for those:
+
+> "I'm definitely working."
+> *YouTube is playing in another tab.* 🧸
 
 ---
 
 ## 🚀 Background Mode
 
-Bearly Watching can run automatically in the background using a macOS LaunchAgent.
+Bearly Watching automatically configures a macOS **LaunchAgent** when you run:
 
-The LaunchAgent allows the application to start automatically when you log into your Mac and keeps the process running.
+```bash
+./install.sh
+```
 
-The LaunchAgent is located at:
+The LaunchAgent:
+
+* starts Bearly Watching automatically when you log in
+* keeps the application running in the background
+* allows Rich Presence updates without keeping Terminal open
+
+The LaunchAgent is created at:
 
 ```text
 ~/Library/LaunchAgents/com.bearly-watching.plist
 ```
 
-Application logs are stored locally in:
+### Application Logs
+
+Logs are stored locally in:
 
 ```text
 logs/
@@ -188,7 +211,9 @@ It does **not**:
 * send your Safari history to a server
 * store watch information in a database
 
-The application only reads the YouTube tab information needed to create the Discord Rich Presence.
+The application only reads the YouTube tab information required to create the Discord Rich Presence.
+
+Your browsing stays on your Mac. 🧸🍓
 
 ---
 
@@ -236,15 +261,22 @@ bearly-watching/
 │
 ├── main.py
 ├── safari.py
-├── discord_test.py
+├── discord-test.py
+├── install.sh
 │
 ├── config.py
-├── config.example.py
 ├── requirements.txt
 │
 ├── README.md
 ├── LICENSE
 └── .gitignore
+```
+
+The following directories are created locally and are **not included in the repository**:
+
+```text
+.venv/
+logs/
 ```
 
 ### Main Files
@@ -259,7 +291,11 @@ Handles Safari automation and YouTube video detection.
 
 #### `discord_test.py`
 
-Utility for testing the Discord Rich Presence connection.
+A utility for testing the Discord Rich Presence connection.
+
+#### `install.sh`
+
+Automates the installation process, including environment setup, dependency installation, logging setup, and LaunchAgent configuration.
 
 #### `config.py`
 
@@ -279,7 +315,7 @@ The default polling interval is:
 POLL_INTERVAL = 5
 ```
 
-This means Bearly Watching checks Safari approximately every 5 seconds.
+This means Bearly Watching checks Safari approximately every **5 seconds**.
 
 You can adjust the interval if needed:
 
@@ -293,18 +329,26 @@ A lower value provides faster updates but may increase CPU usage.
 
 ## 🐛 Troubleshooting
 
-### Discord does not show the Rich Presence
+### Discord doesn't show the Rich Presence
 
 Make sure:
 
 1. Discord Desktop is running.
 2. You are logged into Discord.
-3. Bearly Watching can connect to Discord.
+3. Bearly Watching is running.
 4. YouTube is open in Safari.
-5. Bearly Watching is running with:
+5. Safari automation permissions have been granted.
+
+You can check the application logs with:
 
 ```bash
-python main.py
+tail -f logs/bearly-watching.log
+```
+
+For errors:
+
+```bash
+tail -f logs/bearly-watching-error.log
 ```
 
 ---
@@ -318,6 +362,7 @@ Make sure:
 3. **Allow JavaScript from Apple Events** is enabled.
 4. Safari is running.
 5. The video has finished loading.
+6. macOS automation permissions have been granted.
 
 ---
 
@@ -329,18 +374,18 @@ If multiple YouTube videos are playing simultaneously, the selected video may de
 
 ---
 
-### Check application logs
+### LaunchAgent is not running
 
-If Bearly Watching is running through LaunchAgent:
+You can check whether the LaunchAgent is loaded with:
 
 ```bash
-tail -f logs/bearly-watching.log
+launchctl list | grep bearly-watching
 ```
 
-For errors:
+If needed, check the LaunchAgent configuration:
 
 ```bash
-tail -f logs/bearly-watching-error.log
+plutil -lint ~/Library/LaunchAgents/com.bearly-watching.plist
 ```
 
 ---
@@ -363,26 +408,38 @@ Never publish:
 
 ## 🗺️ Roadmap
 
+### 🎬 Detection
+
 * [x] YouTube multi-tab detection
 * [x] Playing and paused states
 * [x] Finished video detection
 * [x] Live stream detection
 * [x] Dynamic thumbnails
 * [x] Playback progress
+
+### 💬 Discord
+
+* [x] Discord Rich Presence
 * [x] Discord auto-reconnect
+* [ ] Customizable Rich Presence messages
+* [ ] Optional configuration UI
+
+### 🚀 System
+
 * [x] LaunchAgent background support
 * [ ] Easier one-command installation
 * [ ] Improved LaunchAgent installer
+
+### 🧸 Future Improvements
+
 * [ ] Better handling of multiple simultaneously playing videos
-* [ ] Customizable Rich Presence messages
-* [ ] Optional configuration UI
 * [ ] More YouTube page compatibility
 
 ---
 
 ## 📜 License
 
-Bearly Watching is open-source software licensed under the MIT License.
+Bearly Watching is open-source software licensed under the **MIT License**.
 
 See [`LICENSE`](LICENSE) for details.
 
@@ -390,10 +447,10 @@ See [`LICENSE`](LICENSE) for details.
 
 ## 🧸🍓 About
 
-Bearly Watching started as a small macOS automation project built around Safari, YouTube, and Discord Rich Presence.
+Bearly Watching started as a small macOS automation project built around **Safari, YouTube, and Discord Rich Presence**.
 
-The goal is simple:
+The idea is simple:
 
-> Make your Discord status feel a little more like you. 🧸🍓
+> Make your Discord status feel a little more cute. 🧸🍓
 
 Made with 🧸🍓 and probably too much YouTube.
