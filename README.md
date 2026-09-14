@@ -1,41 +1,47 @@
-# I Have 10 Minutes 🍓🌷
+# Bearly Watching 🧸🍓
 
-> An iOS app for making the most of the little moments you have.
+> A simple macOS app that turns your Safari YouTube session into Discord Rich Presence.
 
-**I Have 10 Minutes** is a simple SwiftUI app that helps you find small activities based on how much time you have and what you need right now.
+**Bearly Watching** is a lightweight, local-only macOS app that detects YouTube videos playing in Safari and turns your current watch session into a cute simple Youtube Discord Rich Presence.
 
-Whether you want to rest, focus, have fun, or get something done, the app gives you a small and manageable activity to start with.
+It works across Safari tabs — even when the YouTube tab isn't currently active.
 
-Everything is designed to feel simple, gentle, and easy to use. 🌷
+Everything runs locally on your Mac.
+No YouTube login. No external backend. No tracking.
 
 ---
 
 ## ✨ Features
 
-* ⏱️ Choose how much time you have
-* 🌿 Get gentle activity suggestions
-* 🛌 Rest activities
-* 🧠 Focus activities
-* 🎨 Fun and creative activities
-* ✅ Small productivity activities
-* 💭 View activity details and steps
-* ▶️ Start an activity timer
-* 📖 Track completed activities in History
-* 👤 Personalize your name
-* 🏠 Simple tab-based navigation
-* 🎨 Soft pastel and minimal interface
-* 📱 Built entirely with SwiftUI
+* 🎬 Detect YouTube videos across Safari tabs
+* 📺 Detect YouTube channel names
+* ▶️ Playing detection
+* 💤 Pause detection
+* 🍓 Finished video detection
+* 🔴 Live stream detection
+* 🖼️ Dynamic YouTube thumbnails
+* ⏱️ Playback progress
+* 🔗 Watch Video button
+* 🔌 Discord auto-reconnect
+* 🛡️ Safari & Discord error handling
+* 🚀 Automatic background mode with LaunchAgent
+* 🔒 Local-only architecture
 
 ---
 
 ## 🛠️ Requirements
 
-Before running the app, make sure you have:
+Before installing, make sure you have:
 
 * macOS
-* Xcode
-* iOS Simulator or a compatible iPhone
-* Swift / SwiftUI
+* Safari
+* Discord Desktop
+* Python 3
+* An active internet connection for Discord and YouTube thumbnails
+
+You will also need to enable Safari's:
+
+**Develop → Allow JavaScript from Apple Events**
 
 ---
 
@@ -44,460 +50,407 @@ Before running the app, make sure you have:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/strawbkvma/IHave10Minutes.git
-cd IHave10Minutes
+git clone https://github.com/strawbkvma/bearly-watching.git
+cd bearly-watching
 ```
 
-### 2. Open the project
+### 2. Run the installer
 
-Open:
-
-```text
-IHave10Minutes.xcodeproj
+```bash
+./install.sh
 ```
 
-with Xcode.
+The installer automatically:
 
-### 3. Run the app
+* 🐍 Creates a Python virtual environment
+* 📦 Installs the required dependencies
+* 📁 Creates the local `logs/` directory
+* 🚀 Configures the macOS LaunchAgent
+* 🧸 Starts Bearly Watching in the background
 
-Select an iOS Simulator or connected iPhone, then press:
+You don't need to create your own Discord Application.
 
-**Run ▶︎**
-
-That's it. 🍓
-
----
-
-## 🌷 How It Works
-
-I Have 10 Minutes is built around one simple question:
-
-> **What do you need right now?**
-
-Choose how much time you have, then pick what you feel like doing.
-
-```text
-How much time do you have?
-            ↓
-      Choose a time
-            ↓
-       What do you need?
-            ↓
-   ┌────────┼────────┐
-   ↓        ↓        ↓
-  Rest    Focus    Have Fun
-            │
-            ↓
-     Get Things Done
-            ↓
-      Gentle Activity
-            ↓
-         Start Timer
-```
+Bearly Watching uses a public Discord Application ID included in the project configuration.
 
 ---
 
-## ⏱️ Time Options
+### 3. Enable Safari automation
 
-The app provides different activity durations:
+Before Bearly Watching can detect YouTube videos, enable:
 
-| Time   | Example              |
-| ------ | -------------------- |
-| 5 min  | Reply to One Message |
-| 10 min | Stretch & Breathe    |
-| 20 min | Slow Walk            |
-| 30 min | Longer activities    |
+**Safari → Develop → Allow JavaScript from Apple Events**
 
-The available activities are designed to match the amount of time you have.
+Depending on your macOS and Safari version, you may need to enable Safari's developer features first.
 
----
+macOS may also ask for permission to allow automation between applications.
 
-## 🌿 Activity Categories
-
-### 🛌 Rest
-
-Small activities for slowing down and recharging.
-
-Examples:
-
-* Stretch & Breathe
-* Mindful Tea
-* Window Reset
-* Slow Walk
+> **Tip:** If macOS shows an automation permission prompt, allow it so Bearly Watching can communicate with Safari.
 
 ---
 
-### 🧠 Focus
+### 4. Open YouTube in Safari
 
-Activities designed to help clear your mind and regain focus.
+Open a YouTube video in Safari and start playing it.
 
-Examples:
+Bearly Watching will automatically detect the video and update your Discord Rich Presence.
 
-* Desk Reset
-* Brain Dump
-* One Tiny Task
-* Breathe & Refocus
+You can even switch to another Safari tab while the YouTube video continues playing.
 
----
-
-### 🎨 Have Fun
-
-Small creative or playful activities for taking a break.
-
-Examples:
-
-* Doodle Something
-* Tiny Creative Break
-* Something Silly
-* Play a Little
+That's it. 🧸🍓
 
 ---
 
-### ✅ Get Things Done
+## 💬 Discord Rich Presence
 
-Small tasks that help you make progress without feeling overwhelming.
+When you're watching YouTube, Discord displays an activity similar to:
 
-Examples:
+> **Watching YouTube 🍓 · Channel**
 
-* Reply to One Message
-* Quick Desk Organization
-* Clear One Tiny Task
-* Make a Tiny Plan
+Depending on the current playback state, your activity can include:
 
----
+* 🖼️ YouTube thumbnail
+* 🎬 Video title
+* 📺 Channel name
+* ▶️ Playback state
+* ⏱️ Playback progress
+* 🔗 Watch Video button
 
-## 💭 Activity Details
+### Activity States
 
-Each activity includes:
-
-* Category
-* Duration
-* Activity title
-* Short description
-* Step-by-step instructions
-
-Example:
-
-```text
-REST · 10 min
-
-Stretch & Breathe
-
-A small reset for your body and mind.
-
-1. Find a comfortable position
-2. Stretch gently
-3. Take a few slow breaths
-4. Let your shoulders relax
-```
+| State          | Discord Activity              |
+| -------------- | ----------------------------- |
+| ▶️ Playing     | `🧸 little youtube break ♡`   |
+| 🛌 Paused      | `🛌 little bear is resting ♡` |
+| 🍓 Finished    | `🍓 finished watching ♡`      |
+| 🔴 Live        | `🔴 watching live ♡`          |
+| ▶️ Live Paused | `▶️ live stream paused ♡`     |
 
 ---
 
-## ⏳ Activity Timer
+## 🔴 Live Streams
 
-Once an activity is selected, you can start a timer based on its duration.
+Bearly Watching can distinguish between regular YouTube videos and live streams.
 
-The timer supports:
+Supported live states include:
 
-* ▶️ Starting an activity
-* ⏱️ Countdown timer
-* 🏁 Completing an activity
-* 🏠 Returning home after the session
+* 🔴 Live and playing
+* ▶️ Live stream paused
 
-Completed activities are saved to your local history.
-
-Ending a session early does **not** add it to History.
+Because live streams don't have a normal fixed duration, playback progress is handled differently from regular videos.
 
 ---
 
-## 📖 History
+## 🐻 Multi-Tab Detection
 
-The History screen keeps track of activities you have completed.
-
-It allows you to look back at the small things you've taken time to do.
-
-Activity history is stored locally using:
-
-```text
-UserDefaults
-```
-
-No external database is required.
-
----
-
-## 👤 Profile
-
-The Profile screen lets you personalize your experience.
-
-You can set your name and have the Home screen automatically update the greeting.
+Bearly Watching doesn't require YouTube to be your active Safari tab.
 
 For example:
 
 ```text
-Good morning, Alex
+Safari
+├── GitHub
+├── Gmail
+├── Figma
+├── YouTube ← playing
+└── Documentation
 ```
 
-Your name is stored locally using:
+Even if you're working in another Safari tab, Bearly Watching can still detect the YouTube video playing in the background.
 
-```text
-@AppStorage
-```
+Perfect for those:
+
+> "I'm definitely working."
+> *YouTube is playing in another tab.* 🧸
 
 ---
 
-## 🧸 Navigation
+## 🚀 Background Mode
 
-The app uses a simple three-tab navigation:
+Bearly Watching automatically configures a macOS **LaunchAgent** when you run:
 
-```text
-┌──────────┬──────────┬──────────┐
-│   Home   │ History  │ Profile  │
-└──────────┴──────────┴──────────┘
+```bash
+./install.sh
 ```
 
-Activities are presented through a simple flow:
+The LaunchAgent:
+
+* starts Bearly Watching automatically when you log in
+* keeps the application running in the background
+* allows Rich Presence updates without keeping Terminal open
+
+The LaunchAgent is created at:
 
 ```text
-Home
- ↓
-Need
- ↓
-Gentle Idea
- ↓
-Activity Details
- ↓
-Timer
- ↓
-Home
+~/Library/LaunchAgents/com.bearly-watching.plist
 ```
 
----
+### Application Logs
 
-## 🛠️ Tech Stack
-
-* **Swift**
-* **SwiftUI**
-* **Xcode**
-* **UserDefaults**
-* **AppStorage**
-
-The app uses SwiftUI's navigation and state management to keep the interface lightweight and responsive.
-
----
-
-## 📁 Project Structure
+Logs are stored locally in:
 
 ```text
-IHave10Minutes/
-│
-├── IHave10Minutes.xcodeproj
-│
-├── IHave10Minutes/
-│   ├── ActivityDetailView.swift
-│   ├── AppTheme.swift
-│   ├── BottomNavigation.swift
-│   ├── ContentView.swift
-│   ├── GentleIdeaView.swift
-│   ├── HistoryStore.swift
-│   ├── HistoryView.swift
-│   ├── HomeView.swift
-│   ├── IHave10MinutesApp.swift
-│   ├── MainView.swift
-│   ├── NeedView.swift
-│   ├── ProfileView.swift
-│   ├── SplashView.swift
-│   ├── TimeCard.swift
-│   └── TimerView.swift
-│
-├── README.md
-├── LICENSE
-└── .gitignore
+logs/
+├── bearly-watching.log
+└── bearly-watching-error.log
 ```
 
-### Main Files
-
-#### `HomeView.swift`
-
-Displays the greeting, available time options, and the main starting point of the app.
-
-#### `NeedView.swift`
-
-Allows users to choose what they currently need:
-
-* Rest
-* Focus
-* Have Fun
-* Get Things Done
-
-#### `GentleIdeaView.swift`
-
-Contains the activity suggestions and activity information.
-
-#### `ActivityDetailView.swift`
-
-Displays detailed information and steps for the selected activity.
-
-#### `TimerView.swift`
-
-Handles the activity countdown timer and completion flow.
-
-#### `HistoryStore.swift`
-
-Stores and retrieves completed activities using `UserDefaults`.
-
-#### `ProfileView.swift`
-
-Handles the user's name and profile customization.
-
-#### `MainView.swift`
-
-Controls the main tab navigation between Home, History, and Profile.
+These files are excluded from Git using `.gitignore`.
 
 ---
 
 ## 🔒 Privacy
 
-I Have 10 Minutes is designed as a local-first app.
+Bearly Watching is designed to run locally on your Mac.
 
 It does **not**:
 
-* require an account
-* require a backend
-* send activity history to a server
-* store personal information remotely
-* require an internet connection for the core experience
+* require a YouTube login
+* access your YouTube account
+* store your YouTube watch history
+* use an external backend
+* send your Safari history to a server
+* store watch information in a database
 
-Your name and activity history are stored locally on the device.
+The application only reads the YouTube tab information required to create the Discord Rich Presence.
+
+Your browsing stays on your Mac. 🧸🍓
 
 ---
 
 ## 🏗️ Architecture
 
 ```text
-┌──────────────────────┐
-│      SwiftUI App     │
-└──────────┬───────────┘
+┌─────────────────────┐
+│       Safari        │
+│                     │
+│  YouTube video      │
+│  playing / paused   │
+└──────────┬──────────┘
            │
+           │ AppleScript
+           │ + JavaScript
            ▼
-┌──────────────────────┐
-│       MainView       │
-│                      │
-│ Home / History /     │
-│ Profile              │
-└──────────┬───────────┘
+┌─────────────────────┐
+│   Safari Detector   │
+│      safari.py      │
+└──────────┬──────────┘
            │
+           │ Video metadata
+           │ title / channel
+           │ state / URL
            ▼
-┌──────────────────────┐
-│    Activity Flow     │
-│                      │
-│ Need → Idea → Detail │
-│        → Timer       │
-└──────────┬───────────┘
+┌─────────────────────┐
+│   Bearly Watching   │
+│       main.py       │
+└──────────┬──────────┘
            │
+           │ Discord IPC
            ▼
-┌──────────────────────┐
-│    Local Storage     │
-│                      │
-│ UserDefaults         │
-│ AppStorage            │
-└──────────────────────┘
+┌─────────────────────┐
+│       Discord       │
+│   Rich Presence     │
+└─────────────────────┘
 ```
+
+---
+
+## 📁 Project Structure
+
+```text
+bearly-watching/
+│
+├── main.py
+├── safari.py
+├── discord-test.py
+├── install.sh
+│
+├── config.py
+├── requirements.txt
+│
+├── README.md
+├── LICENSE
+└── .gitignore
+```
+
+The following directories are created locally and are **not included in the repository**:
+
+```text
+.venv/
+logs/
+```
+
+### Main Files
+
+#### `main.py`
+
+Controls the main application loop, Discord Rich Presence, state updates, reconnect logic, and error handling.
+
+#### `safari.py`
+
+Handles Safari automation and YouTube video detection.
+
+#### `discord_test.py`
+
+A utility for testing the Discord Rich Presence connection.
+
+#### `install.sh`
+
+Automates the installation process, including environment setup, dependency installation, logging setup, and LaunchAgent configuration.
+
+#### `config.py`
+
+Contains the public Discord Application ID and polling interval.
+
+#### `config.example.py`
+
+Example configuration file for reference.
+
+---
+
+## ⚙️ Configuration
+
+The default polling interval is:
+
+```python
+POLL_INTERVAL = 5
+```
+
+This means Bearly Watching checks Safari approximately every **5 seconds**.
+
+You can adjust the interval if needed:
+
+```python
+POLL_INTERVAL = 3
+```
+
+A lower value provides faster updates but may increase CPU usage.
 
 ---
 
 ## 🐛 Troubleshooting
 
-### The app doesn't build
+### Discord doesn't show the Rich Presence
 
 Make sure:
 
-1. You are using a compatible version of Xcode.
-2. The correct iOS Simulator is selected.
-3. The project is opened through `IHave10Minutes.xcodeproj`.
-4. All Swift files are included in the Xcode target.
+1. Discord Desktop is running.
+2. You are logged into Discord.
+3. Bearly Watching is running.
+4. YouTube is open in Safari.
+5. Safari automation permissions have been granted.
 
----
+You can check the application logs with:
 
-### History isn't showing
-
-Completed activities are stored locally.
-
-Try:
-
-1. Completing an activity instead of ending it early.
-2. Restarting the app.
-3. Running the app again on the same Simulator/device.
-
----
-
-### The profile name doesn't update
-
-The name is shared using:
-
-```swift
-@AppStorage("userName")
+```bash
+tail -f logs/bearly-watching.log
 ```
 
-Make sure the app is running with the latest project files.
+For errors:
+
+```bash
+tail -f logs/bearly-watching-error.log
+```
+
+---
+
+### YouTube is not detected
+
+Make sure:
+
+1. The video is open in Safari.
+2. The URL is a YouTube video page.
+3. **Allow JavaScript from Apple Events** is enabled.
+4. Safari is running.
+5. The video has finished loading.
+6. macOS automation permissions have been granted.
+
+---
+
+### Bearly Watching detects the wrong video
+
+Bearly Watching checks multiple Safari tabs and prioritizes an actively playing YouTube video.
+
+If multiple YouTube videos are playing simultaneously, the selected video may depend on the order in which Safari tabs are detected.
+
+---
+
+### LaunchAgent is not running
+
+You can check whether the LaunchAgent is loaded with:
+
+```bash
+launchctl list | grep bearly-watching
+```
+
+If needed, check the LaunchAgent configuration:
+
+```bash
+plutil -lint ~/Library/LaunchAgents/com.bearly-watching.plist
+```
+
+---
+
+## 🛡️ Security Notes
+
+The Discord Application ID is intentionally included in the project configuration.
+
+Discord Application IDs are public identifiers and are **not equivalent to passwords, bot tokens, or client secrets**.
+
+Never publish:
+
+* Discord bot tokens
+* OAuth client secrets
+* Personal access tokens
+* Private API keys
+* Authentication credentials
 
 ---
 
 ## 🗺️ Roadmap
 
-### 🌷 Activities
+### 🎬 Detection
 
-* [x] Rest activities
-* [x] Focus activities
-* [x] Fun activities
-* [x] Productivity activities
-* [x] Activity instructions
-* [ ] More activity suggestions
-* [ ] More activity illustrations
+* [x] YouTube multi-tab detection
+* [x] Playing and paused states
+* [x] Finished video detection
+* [x] Live stream detection
+* [x] Dynamic thumbnails
+* [x] Playback progress
 
-### ⏳ Timer
+### 💬 Discord
 
-* [x] Activity countdown
-* [x] Early session ending
-* [x] Completion handling
-* [x] Return to Home after session
+* [x] Discord Rich Presence
+* [x] Discord auto-reconnect
+* [ ] Customizable Rich Presence messages
+* [ ] Optional configuration UI
 
-### 📖 History
+### 🚀 System
 
-* [x] Completed activity tracking
-* [x] Local persistence
-* [ ] Activity statistics
-* [ ] Calendar-based history
+* [x] LaunchAgent background support
+* [ ] Easier one-command installation
+* [ ] Improved LaunchAgent installer
 
-### 👤 Personalization
+### 🧸 Future Improvements
 
-* [x] Editable name
-* [x] Local profile storage
-* [ ] More personalization options
-
-### 🎨 Future Improvements
-
-* [ ] More polished animations
-* [ ] More illustrations
-* [ ] Accessibility improvements
-* [ ] Expanded activity library
+* [ ] Better handling of multiple simultaneously playing videos
+* [ ] More YouTube page compatibility
 
 ---
 
 ## 📜 License
 
-I Have 10 Minutes is open-source software licensed under the **MIT License**.
+Bearly Watching is open-source software licensed under the **MIT License**.
 
-See [`LICENSE`](https://github.com/strawbkvma/i-have-10-minutes/blob/main/LICENSE) for details.
+See [`LICENSE`](https://github.com/strawbkvma/bearly-watching/blob/main/LICENSE) for details.
 
 ---
 
-## 🍓 About
+## 🧸🍓 About
 
-**I Have 10 Minutes** started as a small iOS project exploring **SwiftUI, thoughtful interaction design, and tiny moments of everyday life**.
+Bearly Watching started as a small macOS automation project built around **Safari, YouTube, and Discord Rich Presence**.
 
 The idea is simple:
 
-> You don't always need a lot of time to do something good for yourself. 🌷
+> Make your Discord status feel a little more cute. 🧸🍓
 
-Made with SwiftUI ♡
+Made with 🧸🍓 and probably too much YouTube.
